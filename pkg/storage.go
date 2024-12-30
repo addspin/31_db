@@ -3,17 +3,17 @@ package storage
 import (
 	"context"
 
-	"github.com/jackc/pgx/v4/pgxpool"
+	"github.com/jackc/pgx/v5"
 )
 
 // Хранилище данных.
 type Storage struct {
-	db *pgxpool.Pool
+	db *pgx.Conn
 }
 
 // Конструктор, принимает строку подключения к БД.
 func New(constr string) (*Storage, error) {
-	db, err := pgxpool.Connect(context.Background(), constr)
+	db, err := pgx.Connect(context.Background(), constr)
 	if err != nil {
 		return nil, err
 	}
